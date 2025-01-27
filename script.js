@@ -78,9 +78,9 @@ function showSection(sectionId) {
     }
 
     // Show a green pop-up message
-    if (sectionId !== 'register') {
-        alert(`You have navigated to the ${sectionId} section.`);
-    }
+    // if (sectionId !== 'register') { 
+     //   alert(`You have navigated to the ${sectionId} section.`);
+    //} 
 }
 
 function initializePurchaseOrderForm() {
@@ -134,7 +134,7 @@ function validateForm() {
     const addressPattern = /^[a-zA-Z0-9\s,.-]+$/;
     const pincodePattern = /^\d{6}$/;
 
-    const customerName = document.getElementById('customer_name').value;
+   // const customerName = document.getElementById('customer_name').value; 
     const firstName = document.getElementById('first_name').value;
     const lastName = document.getElementById('last_name').value;
     const email = document.getElementById('email').value;
@@ -146,7 +146,8 @@ function validateForm() {
     const city = document.getElementById('city').value;
     const pincode = document.getElementById('pincode').value;
 
-    if (!namePattern.test(customerName) || !namePattern.test(firstName) || !namePattern.test(lastName) || !namePattern.test(contactPerson) || !namePattern.test(state) || !namePattern.test(city)) {
+    if (//!namePattern.test(customerName) || 
+        !namePattern.test(firstName) || !namePattern.test(lastName) || !namePattern.test(contactPerson) || !namePattern.test(state) || !namePattern.test(city)) {
         alert('Names, state, and city should only contain letters and spaces.');
         return false;
     }
@@ -275,6 +276,48 @@ function validateSupplierForm() {
     alert('Supplier registered successfully!');
     return true;
 }
+
+function initializeOrderplacementForm() {
+    const OrderplacementForm = document.getElementById('OrderplacementForm');
+    if (OrderplacementForm) {
+        OrderplacementForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get values from the form
+            const orderid = document.getElementById('order_id').value;
+            const customerid = document.getElementById('cust_id').value;
+            const customername = document.getElementById('cust_name').value;
+            const dateoforder = document.getElementById('date_of_order').value;
+            const dateofdispatch = document.getElementById('date_of_dispatch').value;
+            const totaltaxvalue = document.getElementById('total_tax_value').value;
+            const totaltaxes = document.getElementById('total_taxes').value;
+            const totalamount = document.getElementById('total_amount').value;
+
+            // Create a new table row
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${orderid}</td>
+                <td>${customerid}</td>
+                <td>${customername}</td>
+                <td>${dateoforder}</td>
+                <td>${dateofdispatch}</td>
+                <td>${totaltaxvalue}</td>
+                <td>${totaltaxes}</td>
+                <td>${totalamount}</td>
+                <td class="actions">
+                    <button onclick="deleteRow(this)">Delete</button>
+                </td>
+            `;
+
+            // Append the new row to the table
+            document.querySelector('#OrderplacementTable tbody').appendChild(row);
+
+            // Clear the form fields after submission
+            OrderplacementForm.reset();
+        });
+    }
+}
+
 
 // Add these new functions to script.js
 function showEmployeeForm() {
