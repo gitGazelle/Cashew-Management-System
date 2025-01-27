@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cashew Management System</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Add these to your existing styles */
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            display: block;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th, table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #f2f2f2;
+        }
+
+        .actions button {
+            background-color: #f44336;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .actions button:hover {
+            background-color: #e53935;
+        }
+
+        .action-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .action-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <!-- Admin Login Page -->
+    <section id="admin-login" class="login-section">
+        <h2>Admin Login</h2>
+        <form id="loginForm" onsubmit="return handleLogin()">
+            <div class="form-group">
+                <label for="admin_id">Admin ID:</label>
+                <input type="text" id="admin_id" name="admin_id" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+    </section>
+
+    <!-- Main Content -->
+    <div id="main-content" style="display: none;">
+        <!-- Navbar -->
+        <nav>
+            <div class="container">
+                <h1>Cashew Management System</h1>
+            </div>
+        </nav>
+
+        <!-- Header Section with Buttons -->
+        <header class="header-buttons">
+            <button onclick="showSection('dashboard')">Dashboard</button>
+            <button onclick="showSection('inventory')">Inventory</button>
+            <button onclick="showSection('orders')">Orders</button>
+            <button onclick="showSection('employees')">Employees</button>
+            <button onclick="showSection('reports')">Reports</button>
+            <button onclick="showSection('register')">Register Customer</button>
+        </header>
+
+        <!-- Main Content Sections -->
+        <main class="main-content">
+            <!-- Dashboard -->
+            <section id="dashboard" class="content-section">
+                <h2>Dashboard</h2>
+                <div class="card-container">
+                    <div class="card">
+                        <h3>Total Stock</h3>
+                        <p>1000 kg</p>
+                        <img src="https://img.freepik.com/free-photo/top-view-delicious-cashews-table_23-2148479091.jpg?ga=GA1.1.427848676.1732978877&semt=ais_hybrid" alt="Cashew">
+                    </div>
+                    <div class="card">
+                        <h3>Processed Stock</h3>
+                        <p>500 kg</p>
+                        <img src="https://img.freepik.com/premium-photo/cashew-nut-isolated-white-background_269353-866.jpg?ga=GA1.1.427848676.1732978877&semt=ais_hybrid" alt="Cashew">
+                    </div>
+                    <div class="card">
+                        <h3>Sales Trends</h3>
+                        <canvas id="salesChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Inventory -->
+            <section id="inventory" class="content-section" style="display: none;">
+                <h2>Inventory</h2>
+                <button onclick="showPurchaseOrderForm()" class="action-button">Raw Material Purchase Order</button>
+                <button onclick="showRawMaterialForm()" class="action-button">Raw Material Inventory</button>
+                
+                <div id="purchaseOrderFormContainer" class="form-container" style="display: none;">
+                    <h2>Raw Material Purchase Order</h2>
+                    <form id="purchaseOrderForm">
+                        <div class="form-group">
+                            <label for="purchase_id">Purchase ID:</label>
+                            <input type="text" id="purchase_id" name="purchase_id" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="raw_material_id">Raw Material ID:</label>
+                            <input type="text" id="raw_material_id" name="raw_material_id" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="raw_material_name">Raw Material Name:</label>
+                            <input type="text" id="raw_material_name" name="raw_material_name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="raw_material_required_qty">Required Quantity:</label>
+                            <input type="number" id="raw_material_required_qty" name="raw_material_required_qty" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="raw_material_qty_unit">Quantity Unit:</label>
+                            <input type="text" id="raw_material_qty_unit" name="raw_material_qty_unit" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="raw_material_rate">Rate (Per Unit):</label>
+                            <input type="number" id="raw_material_rate" name="raw_material_rate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="taxable_value">Taxable Value:</label>
+                            <input type="number" id="taxable_value" name="taxable_value" required>
+                        </div>
+                        <button type="submit">Add Purchase Order</button>
+                    </form>
+                </div>
+
+                <div id="rawMaterialFormContainer" class="form-container" style="display: none;">
+                    <h2>Add New Raw Material</h2>
+                    <form id="rawMaterialForm">
+                        <div class="form-group">
+                            <label for="raw_material_id">Raw Material ID:</label>
+                            <input type="text" id="raw_material_id" name="raw_material_id" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="raw_material_name">Raw Material Name:</label>
+                            <input type="text" id="raw_material_name" name="raw_material_name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="raw_material_min_qty">Minimum Quantity:</label>
+                            <input type="number" id="raw_material_min_qty" name="raw_material_min_qty" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="raw_material_total_qty">Total Quantity:</label>
+                            <input type="number" id="raw_material_total_qty" name="raw_material_total_qty" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="raw_material_unit">Unit:</label>
+                            <input type="text" id="raw_material_unit" name="raw_material_unit" required>
+                        </div>
+                        <button type="submit">Add Raw Material</button>
+                    </form>
+                </div>
+
+                <div class="form-container">
+                    <h2>Purchase Order List</h2>
+                    <table id="purchaseOrderTable">
+                        <thead>
+                            <tr>
+                                <th>Purchase ID</th>
+                                <th>Raw Material ID</th>
+                                <th>Raw Material Name</th>
+                                <th>Required Quantity</th>
+                                <th>Quantity Unit</th>
+                                <th>Rate</th>
+                                <th>Taxable Value</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Purchase order rows will be added here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="form-container">
+                    <h2>Raw Material Inventory List</h2>
+                    <table id="inventoryTable">
+                        <thead>
+                            <tr>
+                                <th>Raw Material ID</th>
+                                <th>Raw Material Name</th>
+                                <th>Minimum Quantity</th>
+                                <th>Total Quantity</th>
+                                <th>Unit</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Inventory rows will be added here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Raw Stock</th>
+                                <th>Processed Stock</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Cashew Nuts</td>
+                                <td>500 kg</td>
+                                <td>300 kg</td>
+                                <td>
+                                    <button>Edit</button>
+                                    <button>Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Orders -->
+            <section id="orders" class="content-section" style="display: none;">
+                <h2>Orders</h2>
+                <button onclick="showSupplierForm()" class="action-button">Register New Supplier</button>
+                
+                <div id="supplierFormContainer" class="form-container" style="display: none;">
+                    <h2>Supplier Registration Form</h2>
+                    <form id="supplierForm" onsubmit="return validateSupplierForm()">
+                        <div class="form-group">
+                            <label for="sup_id">Supplier ID:</label>
+                            <input type="text" id="sup_id" name="sup_id" maxlength="10" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="sup_name">Supplier Name:</label>
+                            <input type="text" id="sup_name" name="sup_name" maxlength="100" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="sup_contact">Contact Number:</label>
+                            <input type="text" id="sup_contact" name="sup_contact" maxlength="12" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="sup_email">Email ID:</label>
+                            <input type="email" id="sup_email" name="sup_email" pattern="[a-zA-Z0-9\.\@]*" placeholder="Enter a valid email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="sup_address">Address:</label>
+                            <textarea id="sup_address" name="sup_address" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="sup_city">City:</label>
+                            <input type="text" id="sup_city" name="sup_city" maxlength="50" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="sup_state">State:</label>
+                            <input type="text" id="sup_state" name="sup_state" maxlength="50" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="sup_pincode">Pincode:</label>
+                            <input type="text" id="sup_pincode" name="sup_pincode" maxlength="6" required>
+                        </div>
+                        <button type="submit">Register Supplier</button>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Client Name</th>
+                                <th>Quantity</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>12345</td>
+                                <td>John Doe</td>
+                                <td>200 kg</td>
+                                <td>Pending</td>
+                                <td>
+                                    <button>Update</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Employees -->
+            <section id="employees" class="content-section" style="display: none;">
+                <h2>Employees</h2>
+                <button onclick="showEmployeeForm()" class="action-button">Register New Employee</button>
+
+                <div id="employeeFormContainer" class="form-container" style="display: none;">
+                    <h2>Employee Registration Form</h2>
+                    <form id="employeeForm" onsubmit="return validateEmployeeForm()">
+                        <div class="form-group">
+                            <label for="emp_id">Employee ID:</label>
+                            <input type="text" id="emp_id" name="emp_id" maxlength="10" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="emp_name">Employee Name:</label>
+                            <input type="text" id="emp_name" name="emp_name" maxlength="100" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="emp_contact">Contact Number:</label>
+                            <input type="text" id="emp_contact" name="emp_contact" maxlength="12" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="emp_age">Age:</label>
+                            <input type="number" id="emp_age" name="emp_age" min="18" max="100" required>
+                        </div>
+                        <button type="submit">Register Employee</button>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Role</th>
+                                <th>Productivity</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Vandana gujetti</td>
+                                <td>Manager</td>
+                                <td>High</td>
+                                <td>
+                                    <button>Assign Task</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Snehal lokare</td>
+                                <td>Management</td>
+                                <td>Medium</td>
+                                <td>
+                                    <button>Assign Task</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Komal Khade</td>
+                                <td>Admin</td>
+                                <td>Medium</td>
+                                <td>
+                                    <button>Assign Task</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Smriti Sahoo</td>
+                                <td>Sales</td>
+                                <td>Medium</td>
+                                <td>
+                                    <button>Assign Task</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Reports -->
+            <section id="reports" class="content-section" style="display: none;">
+                <h2>Reports</h2>
+                <div class="card">
+                    <canvas id="reportsChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Customer Registration Form -->
+            <section id="register" class="content-section" style="display: none;">
+                <h2>Customer Registration Form</h2>
+                <form id="customerForm" onsubmit="return validateForm()">
+                    <div class="form-group">
+                        <label for="customer_name">Customer Name:</label>
+                        <input type="text" id="customer_name" name="customer_name" maxlength="100" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="first_name">First Name:</label>
+                        <input type="text" id="first_name" name="first_name" maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="last_name">Last Name:</label>
+                        <input type="text" id="last_name" name="last_name" maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact_number">Contact Number:</label>
+                        <input type="text" id="contact_number" name="contact_number" maxlength="12" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact_person">Contact Person:</label>
+                        <input type="text" id="contact_person" name="contact_person" maxlength="100" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="alternate_contact_number">Alternate Contact Number:</label>
+                        <input type="text" id="alternate_contact_number" name="alternate_contact_number" maxlength="12">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address:</label>
+                        <textarea id="address" name="address" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="state">State:</label>
+                        <input type="text" id="state" name="state" maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="city">City:</label>
+                        <input type="text" id="city" name="city" maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pincode">Pincode:</label>
+                        <input type="text" id="pincode" name="pincode" maxlength="6" required>
+                    </div>
+                    <button type="submit">Register</button>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <!-- Popup Message -->
+    <div id="popup" class="popup hidden">
+        <p id="popupMessage"></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

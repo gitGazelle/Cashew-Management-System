@@ -1,0 +1,270 @@
+/* Base styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f4f8;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: linear-gradient(to right, #f0f4f8, #e0f7fa);
+}
+
+/* Navbar */
+nav {
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    padding: 1rem;
+}
+
+nav h1 {
+    font-size: 1.5rem;
+    color: #008080;
+    margin: 0;
+}
+
+/* Layout */
+.layout {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+@media (min-width: 768px) {
+    .layout {
+        flex-direction: row;
+    }
+}
+
+/* Sidebar */
+.sidebar {
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    height: auto;
+    z-index: 10;
+}
+
+@media (min-width: 768px) {
+    .sidebar {
+        width: 16rem;
+        height: 100vh;
+    }
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+@media (min-width: 768px) {
+    .sidebar ul {
+        flex-direction: column;
+    }
+}
+
+.sidebar li {
+    margin-bottom: 1rem;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: #555;
+    transition: color 0.3s;
+}
+
+.sidebar a:hover {
+    color: #008080;
+}
+
+/* Main Content */
+.main-content {
+    padding: 1.5rem;
+    flex: 1;
+    overflow-y: auto;
+}
+
+h2 {
+    font-size: 2rem;
+    color: #008080;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+/* Card Container */
+.card-container {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Cards */
+.card {
+    background-color: #ffffff;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    flex: 1;
+    min-width: 250px;
+    margin-bottom: 1rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.card p {
+    font-size: 1.5rem;
+}
+
+/* Buttons */
+button {
+    background-color: #008080;
+    color: #ffffff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: block;
+    margin: 0 auto;
+}
+
+button:hover {
+    background-color: #006666;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 0.75rem;
+    text-align: left;
+}
+
+th {
+    background-color: #f3f4f6;
+}
+
+/* Images */
+img {
+    width: 100%;
+    height: 8rem;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+/* Header Buttons */
+.header-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 1rem;
+    background-color: #e0f7fa;
+}
+
+.header-buttons button {
+    background-color: #008080;
+    color: #ffffff;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.header-buttons button:hover {
+    background-color: #006666;
+    transform: scale(1.05);
+}
+
+/* Popup */
+.popup {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #4caf50;
+    color: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    display: none;
+}
+
+.popup.hidden {
+    display: none;
+}
+
+/* Form Styles */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #008080;
+    outline: none;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    form {
+        padding: 1rem;
+    }
+
+    .header-buttons button {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+}
