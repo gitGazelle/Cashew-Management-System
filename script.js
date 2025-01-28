@@ -1,3 +1,49 @@
+// Function to validate and handle the login form
+function handleLogin() {
+    const adminId = document.getElementById('admin_id').value;
+    const password = document.getElementById('password').value;
+
+    // Simple validation for demonstration purposes
+    if (adminId === 'admin' && password === 'zyberly') {
+        document.getElementById('admin-login').style.display = 'none';
+        document.getElementById('main-content').style.display = 'block';
+        showSection('dashboard'); // Show dashboard upon successful login
+        return false; // Prevent form submission
+    } else {
+        alert('Invalid Admin ID or Password');
+        return false; // Prevent form submission
+    }
+}
+
+function showSection(sectionId) {
+    // Hide all sections
+    const sections = document.querySelectorAll('.content-section');
+    sections.forEach(section => {
+        section.style.display = 'none';
+    });
+
+    // Show the selected section
+    const selectedSection = document.getElementById(sectionId);
+    if (selectedSection) {
+        selectedSection.style.display = 'block';
+    }
+}
+
+// Function to show the Order Placement form
+function showOrderPlacementForm() {
+    showSection('order_placement');
+}
+
+// Function to validate the order placement form
+function validateOrderPlacementForm(event) {
+    event.preventDefault();
+
+    // Add your validation logic here
+
+    alert('Order placed successfully!');
+    return true;
+}
+
 // Example chart for Sales Trends
 var ctx = document.getElementById('salesChart').getContext('2d');
 var salesChart = new Chart(ctx, {
@@ -44,20 +90,6 @@ var reportsChart = new Chart(ctx2, {
     }
 });
 
-function handleLogin() {
-    const adminId = document.getElementById('admin_id').value;
-    const password = document.getElementById('password').value;
-
-    // Simple validation for demonstration purposes
-    if (adminId === 'admin' && password === 'zyberly') {
-        document.getElementById('admin-login').style.display = 'none';
-        document.getElementById('main-content').style.display = 'block';
-        return false; // Prevent form submission
-    } else {
-        alert('Invalid Admin ID or Password');
-        return false; // Prevent form submission
-    }
-}
 
 function showSection(sectionId) {
     // Hide all sections
@@ -83,6 +115,7 @@ function showSection(sectionId) {
     //} 
 }
 
+// Function to initialize the purchase order form
 function initializePurchaseOrderForm() {
     const purchaseOrderForm = document.getElementById('purchaseOrderForm');
     if (purchaseOrderForm) {
@@ -277,6 +310,7 @@ function validateSupplierForm() {
     return true;
 }
 
+// Function to initialize the order placement form
 function initializeOrderplacementForm() {
     const OrderplacementForm = document.getElementById('OrderplacementForm');
     if (OrderplacementForm) {
@@ -317,8 +351,6 @@ function initializeOrderplacementForm() {
         });
     }
 }
-
-
 // Add these new functions to script.js
 function showEmployeeForm() {
     const form = document.getElementById('employeeFormContainer');
@@ -385,6 +417,27 @@ function handleRawMaterialSubmit(event) {
         </td>
     `;
 
+    // Function to show the selected section
+function showSection(sectionId) {
+    console.log("Navigating to section:", sectionId);
+
+    const sections = document.querySelectorAll('.content-section');
+    sections.forEach(section => {
+        section.style.display = 'none';
+    });
+
+    const selectedSection = document.getElementById(sectionId);
+    if (selectedSection) {
+        selectedSection.style.display = 'block';
+    }
+}
+
+// Function to validate and handle the login form
+function handleLogin() {
+    const adminId = document.getElementById('admin_id').value;
+    const password = document.getElementById('password').value;
+
+    if (adminId === 'admin' && password === 'zyberly') {
     // Append the new row to the table
     document.querySelector('#inventoryTable tbody').appendChild(row);
 
@@ -406,3 +459,6 @@ window.onload = function() {
         rawMaterialForm.addEventListener('submit', handleRawMaterialSubmit);
     }
 };
+}
+}
+
