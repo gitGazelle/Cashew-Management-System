@@ -269,136 +269,112 @@
             </section>
 
             <!-- Orders -->
-            <section id="orders" class="content-section" style="display: none;">
-                <h2>Orders</h2>
-                <button onclick="showSupplierForm()" class="action-button">Register New Supplier</button>
-                
-                <div id="supplierFormContainer" class="form-container" style="display: none;">
-                    <h2>Supplier Registration Form</h2>
-                    <form id="supplierForm" onsubmit="return validateSupplierForm()">
-                        <div class="form-group">
-                            <label for="sup_id">Supplier ID:</label>
-                            <input type="text" id="sup_id" name="sup_id" maxlength="10" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="sup_name">Supplier Name:</label>
-                            <input type="text" id="sup_name" name="sup_name" maxlength="100" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="sup_contact">Contact Number:</label>
-                            <input type="text" id="sup_contact" name="sup_contact" maxlength="12" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="sup_email">Email ID:</label>
-                            <input type="email" id="sup_email" name="sup_email" pattern="[a-zA-Z0-9\.\@]*" placeholder="Enter a valid email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="sup_address">Address:</label>
-                            <textarea id="sup_address" name="sup_address" required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="sup_city">City:</label>
-                            <input type="text" id="sup_city" name="sup_city" maxlength="50" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="sup_state">State:</label>
-                            <input type="text" id="sup_state" name="sup_state" maxlength="50" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="sup_pincode">Pincode:</label>
-                            <input type="text" id="sup_pincode" name="sup_pincode" maxlength="6" required>
-                        </div>
-                        <button type="submit">Register Supplier</button>
-                    </form>
-                </div>
+        <section id="orders" class="content-section" style="display: none;">
+            <h2>Orders</h2>
+            <button onclick="showSupplierForm()" class="action-button">Register New Supplier</button>
+            <button onclick="showSection('order_placement')" class="action-button">Place New Order</button>
 
-                <!-- Order Placement Form -->
-                <div id="order_placement" class="content-section" style="display: none;">
-                    <h2>Order Placement Form</h2>
-                    <form id="orderPlacementForm" onsubmit="return validateOrderPlacementForm()">
-                        <div class="form-group">
-                            <label for="order_id">Order ID:</label>
-                            <input type="text" id="order_id" name="order_id" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="cust_id">Customer ID:</label>
-                            <input type="text" id="cust_id" name="cust_id" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="cust_name">Customer Name:</label>
-                            <input type="text" id="cust_name" name="cust_name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="date_of_order">Date of Order:</label>
-                            <input type="date" id="date_of_order" name="date_of_order" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="date_of_dispatch">Date of Dispatch:</label>
-                            <input type="date" id="date_of_dispatch" name="date_of_dispatch" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="total_tax_value">Total Tax Value:</label>
-                            <input type="number" id="total_tax_value" name="total_tax_value" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="total_taxes">Total Taxes:</label>
-                            <input type="number" id="total_taxes" name="total_taxes" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="total_amount">Total Amount:</label>
-                            <input type="number" id="total_amount" name="total_amount" required>
-                        </div>
-                        <button type="submit">Place Order</button>
-                    </form>
-                </div>
+            <div id="supplierFormContainer" class="form-container" style="display: none;">
+                <h2>Supplier Registration Form</h2>
+                <form id="supplierForm" onsubmit="return validateSupplierForm()">
+                    <div class="form-group">
+                        <label for="sup_id">Supplier ID:</label>
+                        <input type="text" id="sup_id" name="sup_id" maxlength="10" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sup_name">Supplier Name:</label>
+                        <input type="text" id="sup_name" name="sup_name" maxlength="100" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sup_contact">Contact Number:</label>
+                        <input type="text" id="sup_contact" name="sup_contact" maxlength="12" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sup_email">Email ID:</label>
+                        <input type="email" id="sup_email" name="sup_email" pattern="[a-zA-Z0-9\.\@]*" placeholder="Enter a valid email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sup_address">Address:</label>
+                        <textarea id="sup_address" name="sup_address" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="sup_city">City:</label>
+                        <input type="text" id="sup_city" name="sup_city" maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sup_state">State:</label>
+                        <input type="text" id="sup_state" name="sup_state" maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sup_pincode">Pincode:</label>
+                        <input type="text" id="sup_pincode" name="sup_pincode" maxlength="6" required>
+                    </div>
+                    <button type="submit">Register Supplier</button>
+                </form>
+            </div>
 
-                <div class="form-container">
-                    <h2>Order placement List</h2>
-                    <table id="OrderplacementTable">
-                        <thead>
-                            <tr>
-                                <th>Order ID</th>
-                                <th>Customer ID</th>
-                                <th>Customer Name</th>
-                                <th>Date of Order</th>
-                                <th>Date of Dispatch</th>
-                                <th>Tax Value</th>
-                                <th>Total Taxes</th>
-                                <th>Total Amount</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- order placement rows will be added here dynamically -->
-                        </tbody>
-                    </table>
-                </div>
+            <div class="form-container">
+                <h2>Order Placement List</h2>
+                <table id="OrderplacementTable">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer ID</th>
+                            <th>Customer Name</th>
+                            <th>Date of Order</th>
+                            <th>Date of Dispatch</th>
+                            <th>Tax Value</th>
+                            <th>Total Taxes</th>
+                            <th>Total Amount</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Order placement rows will be added here dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
 
-                <div class="card">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Order ID</th>
-                                <th>Client Name</th>
-                                <th>Quantity</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>12345</td>
-                                <td>John Doe</td>
-                                <td>200 kg</td>
-                                <td>Pending</td>
-                                <td>
-                                    <button>Update</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+        <!-- Order Placement Form -->
+        <section id="order_placement" class="form-container content-section" style="display: none;">
+            <h2>Order Placement Form</h2>
+            <form id="orderPlacementForm" onsubmit="return validateOrderPlacementForm(event)">
+                <div class="form-group">
+                    <label for="order_id">Order ID:</label>
+                    <input type="text" id="order_id" name="order_id" required>
                 </div>
-            </section>
+                <div class="form-group">
+                    <label for="cust_id">Customer ID:</label>
+                    <input type="text" id="cust_id" name="cust_id" required>
+                </div>
+                <div class="form-group">
+                    <label for="cust_name">Customer Name:</label>
+                    <input type="text" id="cust_name" name="cust_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="date_of_order">Date of Order:</label>
+                    <input type="date" id="date_of_order" name="date_of_order" required>
+                </div>
+                <div class="form-group">
+                    <label for="date_of_dispatch">Date of Dispatch:</label>
+                    <input type="date" id="date_of_dispatch" name="date_of_dispatch" required>
+                </div>
+                <div class="form-group">
+                    <label for="total_tax_value">Total Tax Value:</label>
+                    <input type="number" id="total_tax_value" name="total_tax_value" required>
+                </div>
+                <div class="form-group">
+                    <label for="total_taxes">Total Taxes:</label>
+                    <input type="number" id="total_taxes" name="total_taxes" required>
+                </div>
+                <div class="form-group">
+                    <label for="total_amount">Total Amount:</label>
+                    <input type="number" id="total_amount" name="total_amount" required>
+                </div>
+                <button type="submit">Place Order</button>
+            </form>
+        </section>
 
             <!-- Employees -->
             <section id="employees" class="content-section" style="display: none;">
@@ -545,4 +521,4 @@
 
     <script src="script.js"></script>
 </body>
-</html>
+</html>                                                                                                                                                                                         
